@@ -39,11 +39,22 @@ end
     dx
 end
 
+@export_py function square_grad!(dx::Vector{Float32}, x::Vector{Float32}, dout::Vector{Float32})::Vector{Float32}
+    for i in eachindex(x)
+        dx[i] = 2 * x[i]
+    end
+    for i in eachindex(x)
+        dx[i] = dx[i] * dout[i]
+    end
+    dx
+end
+
 function init()
     @export_pymodule _basic begin
         jl_mat_add = Pyfunc(mat_add)
         jl_square = Pyfunc(square)
         jl_square_grad = Pyfunc(square_grad)
+        jl_square_grad_in = Pyfunc(square_grad!)
     end
 end
 
