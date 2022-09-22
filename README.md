@@ -13,3 +13,5 @@ python bench_msjulia.py
 # time cost of first run: 0.13610386848449707
 # time cost of 1000 times run: 1.2894513607025146
 ```
+
+另外一种方式是不使用Custom自定义算子的接口，而是对Cell类型定义前向和反向的行为，这时候需要把Tensor转化为ndarray，仅能在动态图模式下运行。
